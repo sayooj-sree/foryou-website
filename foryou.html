@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For You</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #0a0015;
+      color: #e1d4f0;
+      overflow-x: hidden;
+      font-family: 'Crimson Text', serif;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 60px 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .page1 {
+      background: 
+        linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)),
+        linear-gradient(135deg, #0a0015 0%, #2d1b47 30%, #4c1d95 60%, #7c3aed 90%);
+      background-size: 400% 400%;
+      animation: gradientFlow 15s ease-in-out infinite;
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    @keyframes gradientFlow {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .page1::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="g" cx="50%" cy="50%"><stop offset="0%" style="stop-color:rgba(251,146,189,0.4)"/><stop offset="100%" style="stop-color:rgba(251,146,189,0)"/></radialGradient></defs><circle cx="20" cy="20" r="2" fill="url(%23g)"><animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite"/></circle><circle cx="80" cy="30" r="1.5" fill="url(%23g)"><animate attributeName="opacity" values="0;1;0" dur="4s" repeatCount="indefinite" begin="1s"/></circle><circle cx="60" cy="70" r="2.5" fill="url(%23g)"><animate attributeName="opacity" values="0;1;0" dur="5s" repeatCount="indefinite" begin="2s"/></circle></svg>') repeat;
+      opacity: 0.6;
+      animation: sparkle 10s linear infinite;
+    }
+
+    @keyframes sparkle {
+      0% {
+        transform: translateX(0) translateY(0);
+      }
+      100% {
+        transform: translateX(-100px) translateY(-100px);
+      }
+    }
+
+    .page1 h1 {
+      font-size: clamp(4rem, 12vw, 8rem);
+      color: white;
+      background: linear-gradient(45deg, #fb92bd, #f9a8d4, #fecaca);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 
+        0 0 30px rgba(251, 146, 189, 0.5),
+        0 0 60px rgba(251, 146, 189, 0.3);
+      animation: 
+        titleFloat 6s ease-in-out infinite,
+        titleGlow 8s ease-in-out infinite;
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 2;
+      font-family: 'Dancing Script', cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page1 h1 span {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-style: normal;
+      font-size: 0.5em;
+      margin-top: 0.5em;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    @keyframes titleFloat {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    @keyframes titleGlow {
+      0%, 100% {
+        text-shadow: 
+          0 0 30px rgba(251, 146, 189, 0.5),
+          0 0 60px rgba(251, 146, 189, 0.3);
+      }
+      50% {
+        text-shadow: 
+          0 0 50px rgba(251, 146, 189, 0.8),
+          0 0 100px rgba(251, 146, 189, 0.6),
+          0 0 150px rgba(251, 146, 189, 0.4);
+      }
+    }
+
+    .next-page-btn {
+      position: absolute;
+      bottom: 80px;
+      background: transparent;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 2;
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 1px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .next-page-btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .next-page-btn::after {
+      content: "↓";
+      margin-top: 5px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+    }
+
+    .page2, .page3 {
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(251, 146, 189, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(251, 146, 189, 0.15) 0%, transparent 50%),
+        linear-gradient(135deg, #0a0015 0%, #1e1b3d 30%, #2d1b47 60%, #1a1625 100%);
+      color: #e1d4f0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page2::before, .page3::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(251, 146, 189, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .content {
+      max-width: 800px;
+      line-height: 2;
+      font-size: 1.3rem;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: contentFadeIn 1.5s ease-out forwards;
+      position: relative;
+      z-index: 2;
+      font-family: 'Crimson Text', serif;
+      letter-spacing: 0.3px;
+    }
+
+    @keyframes contentFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Updated text animations with only color change on hover */
+    .content p {
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: simpleFadeIn 1s ease-out forwards;
+      font-weight: 400;
+      color: #f0e6ff;
+      text-indent: 2em;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .content p:hover {
+      color: #fb92bd;
+    }
+
+    @keyframes simpleFadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .content p::first-line {
+      font-variant: small-caps;
+      font-weight: 600;
+      color: #fb92bd;
+    }
+
+    .content p:nth-child(1) { animation-delay: 0.2s; }
+    .content p:nth-child(2) { animation-delay: 0.4s; }
+    .content p:nth-child(3) { animation-delay: 0.6s; }
+    .content p:nth-child(4) { animation-delay: 0.8s; }
+    .content p:nth-child(5) { animation-delay: 1.0s; }
+    .content p:nth-child(6) { animation-delay: 1.2s; }
+    .content p:nth-child(7) { animation-delay: 1.4s; }
+    .content p:nth-child(8) { animation-delay: 1.6s; }
+
+    .highlight {
+      margin-top: 40px !important;
+      font-style: italic;
+      color: #fb92bd !important;
+      font-size: 1.2rem;
+      position: relative;
+      padding: 25px 30px;
+      border-left: 4px solid #fb92bd;
+      background: rgba(251, 146, 189, 0.08);
+      border-radius: 0 15px 15px 0;
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-indent: 0;
+    }
+
+    .highlight::before {
+      content: '"';
+      position: absolute;
+      top: -15px;
+      left: -8px;
+      font-size: 4rem;
+      color: #fb92bd;
+      opacity: 0.4;
+      font-family: 'Dancing Script', cursive;
+    }
+
+    .highlight::after {
+      content: '"';
+      position: absolute;
+      bottom: -25px;
+      right: 15px;
+      font-size: 4rem;
+      color: #fb92bd;
+      opacity: 0.4;
+      font-family: 'Dancing Script', cursive;
+    }
+
+    .footer-text {
+      margin-top: 60px;
+      font-size: 1.1rem;
+      text-align: center;
+      color: #b8a5c7;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: footerFadeIn 1.5s ease-out 2s forwards;
+      position: relative;
+      font-family: 'Dancing Script', cursive;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    @keyframes footerFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .footer-text::before {
+      content: '🩷';
+      margin-right: 8px;
+      animation: heartbeat 2s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+    }
+
+    /* Enhanced page 3 content styling */
+    .page3 .content p {
+      font-size: 1.4rem;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 500;
+      color: #fb92bd;
+      text-indent: 0;
+    }
+
+    /* Floating particles */
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(251, 146, 189, 0.6);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: floatUp 8s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 0;
+        transform: translateY(100vh) scale(0);
+      }
+      10% {
+        opacity: 1;
+        transform: translateY(90vh) scale(1);
+      }
+      90% {
+        opacity: 1;
+        transform: translateY(-10vh) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-20vh) scale(0);
+      }
+    }
+
+    /* Animated Hearts for page 3 */
+    .heart {
+      position: absolute;
+      color: rgba(251, 146, 189, 0.3);
+      font-size: 20px;
+      pointer-events: none;
+      animation: heartFloat 12s linear infinite;
+      z-index: 1;
+    }
+
+    .heart:nth-child(odd) {
+      color: rgba(251, 146, 189, 0.25);
+    }
+
+    .heart:nth-child(3n) {
+      color: rgba(251, 146, 189, 0.35);
+      font-size: 16px;
+    }
+
+    .heart:nth-child(4n) {
+      color: rgba(251, 146, 189, 0.3);
+      font-size: 24px;
+    }
+
+    @keyframes heartFloat {
+      0% {
+        opacity: 0;
+        transform: translateY(100vh) scale(0) rotate(0deg);
+      }
+      10% {
+        opacity: 1;
+        transform: translateY(90vh) scale(1) rotate(45deg);
+      }
+      50% {
+        transform: translateY(50vh) scale(1.2) rotate(180deg);
+      }
+      90% {
+        opacity: 1;
+        transform: translateY(-10vh) scale(1) rotate(315deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-20vh) scale(0) rotate(360deg);
+      }
+    }
+
+    .heart.small {
+      font-size: 14px;
+      animation-duration: 10s;
+    }
+
+    .heart.medium {
+      font-size: 18px;
+      animation-duration: 14s;
+    }
+
+    .heart.large {
+      font-size: 26px;
+      animation-duration: 16s;
+    }
+
+    /* Exit button styling */
+    .exit-btn {
+      background: linear-gradient(45deg, #fb92bd, #f9a8d4);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(251, 146, 189, 0.3);
+      z-index: 2;
+      font-family: 'Playfair Display', serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 40px;
+    }
+
+    .exit-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(251, 146, 189, 0.5);
+    }
+
+    /* Exit message overlay */
+    .exit-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 0, 21, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .exit-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .exit-message {
+      color: white;
+      font-size: 2rem;
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      max-width: 600px;
+      margin-bottom: 40px;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      section {
+        padding: 40px 20px;
+      }
+      
+      .page1 h1 {
+        font-size: clamp(3rem, 15vw, 6rem);
+      }
+      
+      .content {
+        font-size: 1.2rem;
+        line-height: 1.8;
+      }
+      
+      .highlight {
+        margin-top: 30px !important;
+        padding: 20px;
+        font-size: 1.1rem;
+      }
+
+      .next-page-btn {
+        bottom: 60px;
+        padding: 12px 24px;
+        font-size: 14px;
+      }
+
+      .page3 .content p {
+        font-size: 1.2rem;
+      }
+
+      .exit-message {
+        font-size: 1.5rem;
+        padding: 0 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .content {
+        font-size: 1.1rem;
+        line-height: 1.7;
+      }
+      
+      .page1 h1 {
+        font-size: clamp(2.5rem, 18vw, 5rem);
+      }
+
+      .page3 .content p {
+        font-size: 1.1rem;
+      }
+
+      .exit-message {
+        font-size: 1.2rem;
+      }
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(10, 0, 21, 0.5);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(45deg, #fb92bd, #f9a8d4);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(45deg, #f472b6, #ec4899);
+    }
+  </style>
+</head>
+<body>
+  <!-- Scroll progress indicator -->
+  <div class="scroll-progress"></div>
+
+  <section class="page1">
+    <h1>Hey<span>I'm still here silently</span></h1>
+    <button class="next-page-btn" onclick="scrollToNextPage()">Scroll down</button>
+  </section>
+
+  <section class="page2">
+    <div class="content">
+      <p>Are you sure I will forget you in this silence? Hmm...nah, I can't.</p>
+      <p>I've never really forgotten you. Even though we've been silent for a while, not a single day has passed without you crossing my mind. I don't text, I don't post, but my silence has always been full of thoughts about you. We both know what kind of relation we had. It wasn't normal, it wasn't public — but for me, it was real. Maybe that was my mistake… taking it seriously when you said you didn't feel anything. But I never blamed you. I stepped away, stayed silent — not out of anger, but out of respect. I wanted you to have your peace, your space, your future…Even if it meant silently breaking myself to pieces.</p>
+      <p>But the truth is, I'm still hurting. Every morning, I wake up missing your voice. Every evening, I remember our secret calls and the sudden silence that took their place, and I don't know how to deal with that. I've wanted to message you so many times. I've stared at my screen, typing and deleting, wondering if reaching out would disturb your peace. I thought maybe you'd feel disturbed. Maybe you'd think, "Why is he back again?" So I chose silence, again and again —Even when it broke me entirely.</p>
+      <p>Because sometimes, understanding someone else's situation matters more than expressing your own pain. And sometimes, it's just too hard to show what you truly feel inside. That's what I've been doing — silently loving you, silently healing, silently hoping. Maybe this silence won't last forever. But for now, it's the only way I can love you without hurting you.</p>
+      <p>But you know what still haunts me? You left when I needed someone the most. That day — I was alone, didn't tell anyone, had no friends, no comfort, no one to lean on… not even you. You knew I had no one else. You knew I was in pain. But your ego won. You chose silence over support. And I'm still stuck there — in that moment, in that loneliness. I still carry everything I wanted to share with you… but never got the chance.</p>
+      <p>So no, this isn't just about missing someone. This is about losing someone in the exact moment you needed them to stay. Still, I won't disturb you. I won't force my presence. But I'm still here — loving you quietly, missing you deeply, and waiting… even in silence.</p>
+    </div>
+    <button class="next-page-btn" onclick="scrollToPage3()" style="position: relative; margin-top: 40px; bottom: auto;">Scroll down</button>
+  </section>
+
+  <section class="page3">
+    <div class="content">
+      <p>Still don't blame you but even now, I'm still here for you. I'm silent, but the silence is always for you and You don't think you have anyone, think about me—I'm here. I know this message might not make you emotional, and l know you already have someone, so... I don't know.</p>
+      <p>This silence won't go on forever; one day it will end.</p>
+      <button class="exit-btn" onclick="showExitMessage()">Close</button>
+      <div class="footer-text">Will please take care of you for me</div>
+    </div>
+  </section>
+
+  <!-- Exit overlay -->
+  <div class="exit-overlay" id="exitOverlay">
+    <div class="exit-message">Thank you for reading this in your busy time.</div>
+  </div>
+
+  <script>
+    // Scroll to next page function
+    function scrollToNextPage() {
+      const page2 = document.querySelector('.page2');
+      page2.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Scroll to page 3 function
+    function scrollToPage3() {
+      const page3 = document.querySelector('.page3');
+      page3.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Show exit message
+    function showExitMessage() {
+      const overlay = document.getElementById('exitOverlay');
+      overlay.classList.add('active');
+      
+      // Close the page after 3 seconds
+      setTimeout(() => {
+        window.close();
+      }, 3000);
+    }
+
+    // Scroll progress indicator
+    window.addEventListener('scroll', () => {
+      const scrollProgress = document.querySelector('.scroll-progress');
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (window.pageYOffset / totalHeight) * 100;
+      scrollProgress.style.setProperty('--scroll-width', `${Math.min(progress, 100)}%`);
+    });
+
+    // Mouse move effect for background
+    document.addEventListener('mousemove', (e) => {
+      const pages = document.querySelectorAll('.page2, .page3');
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      
+      pages.forEach(page => {
+        page.style.setProperty('--x', `${x}%`);
+        page.style.setProperty('--y', `${y}%`);
+      });
+    });
+
+    // Generate floating particles
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 8 + 's';
+      particle.style.animationDuration = (8 + Math.random() * 4) + 's';
+      
+      // Pink color variations
+      const colors = ['rgba(251, 146, 189, 0.6)', 'rgba(249, 168, 212, 0.6)', 'rgba(251, 207, 232, 0.6)'];
+      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+      
+      document.body.appendChild(particle);
+      
+      // Remove particle after animation
+      setTimeout(() => {
+        particle.remove();
+      }, 12000);
+    }
+
+    // Generate floating hearts (only for page 3)
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '🩷';
+      
+      // Random positioning and sizing
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.animationDelay = Math.random() * 12 + 's';
+      heart.style.animationDuration = (10 + Math.random() * 6) + 's';
+      
+      // Random size classes
+      const sizes = ['small', 'medium', 'large'];
+      const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+      heart.classList.add(randomSize);
+      
+      // Add slight horizontal drift
+      const drift = (Math.random() - 0.5) * 100;
+      heart.style.setProperty('--drift', drift + 'px');
+      
+      // Only add hearts when page 3 is visible
+      const page3 = document.querySelector('.page3');
+      const page3Rect = page3.getBoundingClientRect();
+      
+      if (page3Rect.top < window.innerHeight && page3Rect.bottom > 0) {
+        document.body.appendChild(heart);
+        
+        // Remove heart after animation
+        setTimeout(() => {
+          heart.remove();
+        }, 20000);
+      }
+    }
+
+    // Create particles and hearts periodically
+    setInterval(createParticle, 3000);
+    setInterval(() => {
+      // Only create hearts when on page 3
+      const page3 = document.querySelector('.page3');
+      const page3Rect = page3.getBoundingClientRect();
+      if (page3Rect.top < window.innerHeight && page3Rect.bottom > 0) {
+        createHeart();
+      }
+    }, 1500);
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, observerOptions);
+
+    // Observe all content sections
+    document.querySelectorAll('.content').forEach(content => {
+      observer.observe(content);
+    });
+  </script>
+</body>
+</html>
